@@ -5,6 +5,7 @@ return [
         'AssetManager',
         'DoctrineModule',
         'DoctrineORMModule',
+        'PhlySimplePage',
         'Catalog',
         'Web',
     ],
