@@ -1,0 +1,17 @@
+{
+    "name": "Skpd/crown-store",
+    "description": "crown group catalog",
+    "minimum-stability": "alpha",
+    "authors": [
+        {
+            "name": "Skpd",
+            "email": "dm.skpd@gmail.com"
+        }
+    ],
+    "require": {
+        "zendframework/zendframework": "2.*",
+        "doctrine/doctrine-orm-module": "0.*",
+        "doctrine/doctrine-module": "0.*",
+        "rwoverdijk/assetmanager": "1.*"
+    }
+}

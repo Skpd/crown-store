@@ -1,0 +1,28 @@
+<?
+/**
+ * @var $this \Zend\View\Renderer\PhpRenderer
+ * @var $form \Catalog\Form\CategoryForm
+ */
+?>
+
+<?=$this->form()->openTag($form->prepare()->setAttribute('class', 'form-horizontal'))?>
+
+    <? foreach ($form as $element): ?>
+        <? /** @var $element \Zend\Form\Element */ ?>
+        <div class="control-group<?= count($element->getMessages()) ? ' error' : '' ?>">
+            <label for="<?= $element->getName() ?>" class="control-label"><?=$element->getLabel() ?: ucfirst($element->getName())?></label>
+
+            <div class="controls">
+
+                <?=$this->formElement($element->setAttribute('id', $element->getName()))?>
+                <span class="help-inline"><?=$this->formElementErrors($element)?></span>
+            </div>
+        </div>
+    <? endforeach; ?>
+
+    <div class="form-actions">
+        <input class="btn btn-success" type="submit" name="submit" value="Update" />
+        <a class="btn" href="<?=$this->url('manage/categories/list')?>">Back</a>
+    </div>
+
+<?=$this->form()->closeTag($form)?>
