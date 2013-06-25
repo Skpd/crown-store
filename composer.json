@@ -12,6 +12,7 @@
         "zendframework/zendframework": "2.*",
         "doctrine/doctrine-orm-module": "0.*",
         "doctrine/doctrine-module": "0.*",
-        "rwoverdijk/assetmanager": "1.*"
+        "rwoverdijk/assetmanager": "1.*",
+        "phly/phly-simple-page": "dev-master"
     }
 }

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d438c6042363cd7202be04fb95509187",
+    "hash": "ab42229be6eb5e44fbc58f1be13c29c1",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -776,6 +776,59 @@
             "time": "2013-06-01 22:13:43"
         },
         {
+            "name": "phly/phly-simple-page",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/weierophinney/PhlySimplePage.git",
+                "reference": "3840a24c66f51c4a7ce451d5f76f6298776ee480"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/weierophinney/PhlySimplePage/zipball/3840a24c66f51c4a7ce451d5f76f6298776ee480",
+                "reference": "3840a24c66f51c4a7ce451d5f76f6298776ee480",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-console": "2.*",
+                "zendframework/zend-eventmanager": "2.*",
+                "zendframework/zend-http": "2.*",
+                "zendframework/zend-mvc": "2.*",
+                "zendframework/zend-stdlib": "2.*",
+                "zendframework/zend-view": "2.*"
+            },
+            "require-dev": {
+                "zendframework/zend-servicemanager": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PhlySimplePage\\": "src/",
+                    "PhlySimplePageTest\\": "test/"
+                },
+                "classmap": [
+                    "./"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Matthew Weier O'Phinney",
+                    "email": "matthew@weierophinney.net",
+                    "homepage": "http://mwop.net/"
+                }
+            ],
+            "description": "ZF2 Module for easily creating static pages",
+            "homepage": "https://github.com/weierophinney/PhlySimplePage",
+            "keywords": [
+                "module",
+                "zend",
+                "zf2"
+            ],
+            "time": "2013-04-29 13:00:12"
+        },
+        {
             "name": "rwoverdijk/assetmanager",
             "version": "1.3.1",
             "source": {
@@ -1047,9 +1100,9 @@
 
     ],
     "minimum-stability": "alpha",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "phly/phly-simple-page": 20
+    },
     "platform": [
 
     ],
