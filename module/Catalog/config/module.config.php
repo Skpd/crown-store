@@ -8,26 +8,29 @@ return [
             'orm_manager' => 'Doctrine\ORM\EntityManager'
         ]
     ],
-    'controllers'   => [
+    'controllers'     => [
         'invokables' => [
             'Catalog\Controller\ManageCategories' => 'Catalog\Controller\ManageCategoriesController',
             'Catalog\Controller\ManageProducts'   => 'Catalog\Controller\ManageProductsController',
         ],
     ],
-    'form_elements' => [
+    'form_elements'   => [
         'invokables' => [
             'CategoryForm' => 'Catalog\Form\CategoryForm',
             'ProductForm'  => 'Catalog\Form\ProductForm',
         ]
     ],
-    'view_helpers'  => [
+    'view_helpers'    => [
         'invokables' => [
             'CategoriesList' => 'Catalog\View\Helper\CategoriesList'
         ]
     ],
-    'view_manager'  => [
+    'view_manager'    => [
         'template_path_stack' => [
             __DIR__ . '/../view',
+        ],
+        'template_map'        => [
+            'catalog/categories' => __DIR__ . '/../view/catalog/categories/default-list.phtml',
         ],
         'strategies'          => [
             'ViewJsonStrategy',

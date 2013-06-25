@@ -1,0 +1,14 @@
+<?php /**
+ * @var $container \Zend\Navigation\Navigation
+ * @var $this      \Zend\View\Renderer\PhpRenderer
+ */ ?>
+
+<? foreach ($container as $page): ?>
+    <h3><span><?= $page->getLabel() ?></span></h3>
+    <div class="boxIndent">
+        <div class="clear">
+            <div id="relative_div" style="position:relative;z-index:0"></div>
+            <?= $this->navigation($page)->menu() ?>
+        </div>
+    </div>
+<? endforeach; ?>

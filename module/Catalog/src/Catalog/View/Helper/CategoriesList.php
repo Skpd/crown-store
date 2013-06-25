@@ -16,6 +16,7 @@ class CategoriesList extends AbstractHelper implements ServiceLocatorAwareInterf
     use ServiceLocatorAwareTrait;
 
     private $container;
+    private $template = 'catalog/categories';
 
     public function __invoke()
     {
@@ -30,24 +31,17 @@ class CategoriesList extends AbstractHelper implements ServiceLocatorAwareInterf
         return $this;
     }
 
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
     private function buildPages($categories, $parent = null)
     {
         $pages = [];
 
         foreach ($categories as $category) {
+            /** @var $category \Catalog\Entity\Category */
+
             if ($category->getParent() == $parent) {
                 $page = $this->getPage($category);
 
-                $child = $this->buildPages($categories, $category);
-
-                if (!empty($child)) {
-                    $page->addPages($child);
-                }
+                $page->addPages($this->buildPages($categories, $category));
 
                 $pages[] = $page;
             }
@@ -66,6 +60,27 @@ class CategoriesList extends AbstractHelper implements ServiceLocatorAwareInterf
 
     public function __toString()
     {
-        return (string) $this->getView()->navigation()->menu($this->container)->renderMenu();
+        return $this->getView()->render($this->template, ['container' => $this->container]);
+    }
+
+    /**
+     * @param mixed $template
+     */
+    public function setTemplate($template)
+    {
+        $this->template = $template;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    public function getContainer()
+    {
+        return $this->container;
     }
 }
