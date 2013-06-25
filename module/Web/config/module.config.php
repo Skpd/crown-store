@@ -3,6 +3,11 @@
 namespace Web;
 
 return [
+    'service_manager' => [
+        'aliases' => [
+            'orm_manager' => 'Doctrine\ORM\EntityManager'
+        ]
+    ],
     'controllers'  => [
         'invokables' => [
             'Web\Controller\Index' => 'Web\Controller\IndexController',

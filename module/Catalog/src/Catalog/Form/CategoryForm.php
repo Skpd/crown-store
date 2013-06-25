@@ -30,7 +30,7 @@ class CategoryForm extends Form implements InputFilterProviderInterface, Service
                     [
                         'name' => 'DoctrineModule\Validator\ObjectExists',
                         'options' => [
-                            'object_repository' => $this->getServiceLocator()->getServiceLocator()->get('doctrine.entity_manager.orm_default')
+                            'object_repository' => $this->getServiceLocator()->getServiceLocator()->get('orm_manager')
                                 ->getRepository('Catalog\Entity\Category'),
                             'fields' => 'id',
                             'messages' => [
@@ -55,7 +55,7 @@ class CategoryForm extends Form implements InputFilterProviderInterface, Service
             'name'    => 'parent',
             'options' => [
                 'label'          => 'Parent',
-                'object_manager' => $this->getServiceLocator()->getServiceLocator()->get('doctrine.entity_manager.orm_default'),
+                'object_manager' => $this->getServiceLocator()->getServiceLocator()->get('orm_manager'),
                 'target_class'   => 'Catalog\Entity\Category',
                 'property'       => 'name',
                 'empty_option'   => '',

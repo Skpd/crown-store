@@ -66,7 +66,7 @@ class ProductForm extends Form implements InputFilterProviderInterface, ServiceL
             ],
             'options'    => [
                 'label'          => 'Categories',
-                'object_manager' => $this->getServiceLocator()->getServiceLocator()->get('doctrine.entity_manager.orm_default'),
+                'object_manager' => $this->getServiceLocator()->getServiceLocator()->get('orm_manager'),
                 'target_class'   => 'Catalog\Entity\Category',
                 'property'       => 'name',
                 'empty_option'   => '',

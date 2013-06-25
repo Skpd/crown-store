@@ -3,6 +3,11 @@
 namespace Catalog;
 
 return [
+    'service_manager' => [
+        'aliases' => [
+            'orm_manager' => 'Doctrine\ORM\EntityManager'
+        ]
+    ],
     'controllers'   => [
         'invokables' => [
             'Catalog\Controller\ManageCategories' => 'Catalog\Controller\ManageCategoriesController',

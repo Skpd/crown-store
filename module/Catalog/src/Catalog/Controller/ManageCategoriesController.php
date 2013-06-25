@@ -110,7 +110,7 @@ class ManageCategoriesController extends AbstractActionController
     public function getEntityManager()
     {
         if (null === $this->entityManager) {
-            $this->entityManager = $this->serviceLocator->get('doctrine.entity_manager.orm_default');
+            $this->entityManager = $this->serviceLocator->get('orm_manager');
         }
         return $this->entityManager;
     }

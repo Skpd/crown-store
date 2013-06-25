@@ -21,7 +21,7 @@ class CategoriesList extends AbstractHelper implements ServiceLocatorAwareInterf
     {
         if (null === $this->container) {
             /** @var EntityManager $em */
-            $em              = $this->getServiceLocator()->getServiceLocator()->get('doctrine.entity_manager.orm_default');
+            $em              = $this->getServiceLocator()->getServiceLocator()->get('orm_manager');
             $this->container = new Navigation();
 
             $this->container->setPages($this->buildPages($em->getRepository('Catalog\Entity\Category')->findAll()));

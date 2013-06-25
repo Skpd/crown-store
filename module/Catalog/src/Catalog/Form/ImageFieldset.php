@@ -27,7 +27,7 @@ class ImageFieldset extends Fieldset implements InputFilterProviderInterface, Se
     public function init()
     {
         $this->add(['name' => 'image', 'type' => 'file', 'options' => ['label' => 'Image']]);
-        $this->setHydrator(new DoctrineObject($this->serviceLocator->getServiceLocator()->get('doctrine.entity_manager.orm_default'), 'Catalog\Entity\Image'));
+        $this->setHydrator(new DoctrineObject($this->serviceLocator->getServiceLocator()->get('orm_manager'), 'Catalog\Entity\Image'));
         $this->setObject(new Image());
     }
 
