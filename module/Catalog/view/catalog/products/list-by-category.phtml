@@ -1,0 +1,25 @@
+<?
+/**
+ * @var $this \Zend\View\Renderer\PhpRenderer
+ * @var $products \Catalog\Entity\Product[]
+ * @var $category \Catalog\Entity\Category
+ */
+?>
+<?=$this->navigation()->breadcrumbs($this->categorieslist()->getContainer()) ?>
+
+<div class="grid grid-triple">
+    <? foreach ($products as $product): ?>
+        <div class="cell">
+            <div class="product">
+                <a href="<?=$this->url('products/list-by-categories/view', ['slug' => $category->getSlug(), 'name' => $product->getName()])?>">
+                    <img class="preview-small" src="<?=$product->getPreviewImage()?>" alt="<?=$product->getName()?>" />
+                </a>
+                <p class="name">
+                    <a href="<?=$this->url('products/list-by-categories/view', ['slug' => $category->getSlug(), 'name' => $product->getName()])?>">
+                        <?=$product->getName()?>
+                    </a>
+                </p>
+            </div>
+        </div>
+    <? endforeach; ?>
+</div>

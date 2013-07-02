@@ -12,6 +12,7 @@ return [
         'invokables' => [
             'Catalog\Controller\ManageCategories' => 'Catalog\Controller\ManageCategoriesController',
             'Catalog\Controller\ManageProducts'   => 'Catalog\Controller\ManageProductsController',
+            'Catalog\Controller\Products'         => 'Catalog\Controller\ProductsController',
         ],
     ],
     'form_elements'   => [

@@ -24,7 +24,7 @@ class CategoriesList extends AbstractHelper implements ServiceLocatorAwareInterf
             /** @var EntityManager $em */
             $em              = $this->getServiceLocator()->getServiceLocator()->get('orm_manager');
             $this->container = new Navigation();
-
+            Mvc::setDefaultRouter($this->getServiceLocator()->getServiceLocator()->get('router'));
             $this->container->setPages($this->buildPages($em->getRepository('Catalog\Entity\Category')->findAll()));
         }
 
@@ -52,9 +52,13 @@ class CategoriesList extends AbstractHelper implements ServiceLocatorAwareInterf
 
     private function getPage(Category $category)
     {
-        $page = new Uri();
-        $page->setLabel($category->getName());
-        $page->setUri('#');
+        $page = new Mvc();
+
+        $page->setLabel($category->getName())
+            ->setRoute('products/list-by-category')
+            ->setParams(['slug' => $category->getSlug()])
+            ->setRouteMatch(Mvc::getDefaultRouter()->match($this->getServiceLocator()->getServiceLocator()->get('request')));
+
         return $page;
     }
 
