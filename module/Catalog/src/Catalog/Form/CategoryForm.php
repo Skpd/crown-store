@@ -23,6 +23,15 @@ class CategoryForm extends Form implements InputFilterProviderInterface, Service
                     ['name' => 'StringTrim'],
                 ]
             ],
+            'slug' => [
+                'required' => true,
+                'allow_empty' => false,
+                'filters' => [
+                    ['name' => 'HtmlEntities'],
+                    ['name' => 'StringTrim'],
+                    ['name' => 'StringToLower'],
+                ]
+            ],
             'parent' => [
                 'required' => false,
                 'allow_empty' => true,
@@ -48,6 +57,7 @@ class CategoryForm extends Form implements InputFilterProviderInterface, Service
         $this->setName('category');
 
         $this->add(['name' => 'name', 'type' => 'text', 'options' => ['label' => 'Name']]);
+        $this->add(['name' => 'slug', 'type' => 'text', 'options' => ['label' => 'Slug']]);
 
         $this->add(
             [

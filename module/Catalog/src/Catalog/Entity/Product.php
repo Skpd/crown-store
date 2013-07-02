@@ -52,7 +52,8 @@ class Product
     private $updated;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Category")
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="products")
+     * @ORM\JoinTable(name="products_categories")
      * @var Category
      */
     private $categories;
@@ -88,6 +89,8 @@ class Product
     {
         foreach ($categories as $category) {
             $this->categories->add($category);
+            $category->addProduct($this);
+
             if ($category->getParent()) {
                 $this->addCategories([$category->getParent()]);
             }
@@ -98,6 +101,7 @@ class Product
     {
         foreach ($categories as $category) {
             $this->categories->removeElement($category);
+            $category->removeProduct($this);
         }
     }
 

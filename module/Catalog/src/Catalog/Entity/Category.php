@@ -2,6 +2,7 @@
 
 namespace Catalog\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Form\Annotation as Form;
 
@@ -50,7 +51,24 @@ class Category
      */
     private $parent;
 
+    /**
+     * @ORM\Column(type="string", unique=true, length=64)
+     * @var string
+     */
+    private $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="categories")
+     * @var ArrayCollection
+     */
+    private $products;
+
     #endregion
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /** @ORM\PrePersist */
     public function onPrePersist()
@@ -68,6 +86,16 @@ class Category
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function addProduct(Product $product)
+    {
+        $this->products->add($product);
+    }
+
+    public function removeProduct(Product $product)
+    {
+        $this->products->removeElement($product);
     }
 
     #region Getters / Setters
@@ -150,6 +178,38 @@ class Category
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 
     #endregion
