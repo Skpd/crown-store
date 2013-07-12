@@ -8,14 +8,30 @@
     <meta http-equiv="Content-Language" content="ru">
     <?= $this->headMeta() ?>
 
+
     <? $this->headLink()->prependStylesheet($this->basePath('css/style.css')); ?>
+    <? $this->headLink()->prependStylesheet($this->basePath('css/catalog.css')); ?>
+    <? $this->headLink()->prependStylesheet($this->basePath('css/bootstrap.min.css')); ?>
     <?= $this->headLink() ?>
     <link rel="shortcut icon" href="<?= $this->basePath('favicon.ico') ?>" />
 </head>
 <body id="body">
 <div class="main">
-    <div id="header" style="text-align: center;">
-        <a href="/"><img src="/img/logo.png" style="padding: 15px 0;width: 235px;height:151px;" /></a>
+    <div id="header">
+        <div class="row">
+            <a class="span4" href="/"><img width="235" height="151" src="/img/logo.png" /></a>
+            <div class="pull-right">
+                <address>
+                    «КРАУН ГРУПП» <br>
+                    192029, Санкт-Петербург, <br>пр. Обуховской Обороны д.70 корп. 2. <br>
+                    (812) 313-19-30 <br />
+                    (812) 309-38-13 <br />
+                    Пн - Пт с 10:00 до 18:00 (MSK) <br>
+                    <a href="mailto:info@crowngroup.ru">info@crowngroup.ru</a>
+                </address>
+            </div>
+        </div>
+
         <div class="menu-bg">
             <div class="clear">
                 <div id="topmenu">
@@ -24,8 +40,8 @@
                         <li><a href="<?= $this->url('manufacture') ?>">Производство</a></li>
                         <li><a href="<?= $this->url('production') ?>">Продукция</a></li>
                         <li><a href="<?= $this->url('contacts') ?>">Контакты</a></li>
-                        <li><a href="<?= $this->url('manage/categories/list') ?>">Categories</a></li>
-                        <li><a href="<?= $this->url('manage/products/list') ?>">Products</a></li>
+<!--                        <li><a href="--><?//= $this->url('manage/categories/list') ?><!--">Categories</a></li>-->
+<!--                        <li><a href="--><?//= $this->url('manage/products/list') ?><!--">Products</a></li>-->
                     </ul>
                 </div>
             </div>
@@ -33,9 +49,9 @@
     </div>
 
 
-    <div id="wrapper">
-        <div class="clear">
-            <div id="left">
+    <div id="wrapper" class="container-fluid">
+        <div class="clear row-fluid main">
+            <div class="span3">
                 <div class="clear">
                     <div class="module-categories">
                         <?=$this->categorieslist(); ?>
@@ -43,7 +59,7 @@
 
                 </div>
             </div>
-            <div class="container">
+            <div class="span9">
 
                 <?= $this->content ?>
 

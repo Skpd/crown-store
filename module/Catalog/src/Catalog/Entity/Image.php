@@ -82,12 +82,12 @@ class Image
             $this->originalWidth  = imagesx($image);
             $this->originalHeight = imagesy($image);
 
-            $thumbnail = imagecreatetruecolor(64, 64);
+            $thumbnail = imagecreatetruecolor(300, 300);
 
-            $this->thumbnailWidth  = 64;
-            $this->thumbnailHeight = 64;
+            $this->thumbnailWidth  = 300;
+            $this->thumbnailHeight = 300;
 
-            imagecopyresampled($thumbnail, $image, 0, 0, 0, 0, 64, 64, $this->originalWidth, $this->originalHeight);
+            imagecopyresampled($thumbnail, $image, 0, 0, 0, 0, 300, 300, $this->originalWidth, $this->originalHeight);
 
             ob_start();
             imagepng($thumbnail);

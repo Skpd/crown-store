@@ -28,6 +28,8 @@ class ProductForm extends Form implements InputFilterProviderInterface, ServiceL
                 'allow_empty' => true,
                 'filters'     => [
                     ['name' => 'StringTrim'],
+                    ['name' => 'StripTags'],
+                    ['name' => 'Callback', 'options' => ['callback' => 'nl2br']]
                 ]
             ],
             'categories'  => [
@@ -51,9 +53,6 @@ class ProductForm extends Form implements InputFilterProviderInterface, ServiceL
             [
             'name'    => 'image',
             'type'    => 'file',
-            'attributes' => [
-                'multiple' => 'multiple'
-            ],
             ]
         );
 
@@ -72,6 +71,20 @@ class ProductForm extends Form implements InputFilterProviderInterface, ServiceL
                 'empty_option'   => '',
             ]
             ]
+        );
+
+        $this->add(
+            array(
+                 'type'    => 'Zend\Form\Element\Collection',
+                 'name'    => 'options',
+                 'options' => array(
+                     'count'                  => 0,
+                     'should_create_template' => true,
+                     'target_element'         => array(
+                         'type' => 'OptionFieldset',
+                     )
+                 )
+            )
         );
     }
 

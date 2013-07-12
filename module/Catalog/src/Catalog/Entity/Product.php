@@ -64,6 +64,11 @@ class Product
      */
     private $images;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Option", mappedBy="product", cascade={"all"})
+     */
+    private $options;
+
     #endregion
 
     /** @ORM\PrePersist */
@@ -83,6 +88,23 @@ class Product
     {
         $this->categories = new ArrayCollection();
         $this->images     = new ArrayCollection();
+        $this->options    = new ArrayCollection();
+    }
+
+    public function addOptions($options)
+    {
+        foreach ($options as $option) {
+            $this->options->add($option);
+            $option->setProduct($this);
+        }
+    }
+
+    public function removeOptions($options)
+    {
+        foreach ($options as $option) {
+            $this->options->removeElement($option);
+            $option->setProduct(null);
+        }
     }
 
     public function addCategories($categories)
@@ -231,6 +253,22 @@ class Product
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @param Option[] $options
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * @return Option[]
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 
     #endregion

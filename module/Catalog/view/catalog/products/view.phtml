@@ -1,0 +1,45 @@
+<?
+/**
+ * @var $this \Zend\View\Renderer\PhpRenderer
+ * @var $product \Catalog\Entity\Product
+ */
+?>
+
+<?=$this->navigation()->breadcrumbs($this->categorieslist()->getContainer()) ?>
+
+<ul class="row">
+    <li class="span4">
+        <span class="thumbnail preview-medium">
+            <? if ($product->getImages()->count()): ?>
+                <img src="<?=$this->url('products/get-image', ['type' => 'medium', 'id' => $product->getImages()->first()->getId()])?>" alt="<?=$product->getName()?>" />
+            <? endif; ?>
+        </span>
+    </li>
+    <li class="span8">
+        <h2>Детали</h2>
+    </li>
+    <? foreach ($product->getOptions() as $option): ?>
+        <li class="span4">
+            <span class="muted"><?=$option->getName()?>: </span><?=$option->getValue()?>
+        </li>
+    <? endforeach; ?>
+</ul>
+
+<div class="row">
+    <h2 class="offset4 span8">Особенности</h2>
+</div>
+<div class="row">
+    <p class="offset4 span8 product-description"><?=$product->getDescription()?></p>
+</div>
+
+<? $this->headScript()->appendFile($this->basePath('js/jquery.zoom-min.js')) ?>
+
+<? $this->headScript()->captureStart() ?>
+    //<script type="text/javascript">
+    (function () {
+        $('.preview-medium').zoom({
+            url: '<?=$this->url('products/get-image', ['type' => 'large', 'id' => $product->getImages()->first()->getId()])?>'
+        });
+    })();
+    //</script>
+<? $this->headScript()->captureEnd() ?>

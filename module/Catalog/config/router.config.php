@@ -141,6 +141,16 @@ return [
                             ]
                         ]
                     ],
+                    'get-image' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route'  => '/image/:id[/:type]',
+                            'defaults' => [
+                                'action' => 'get-image',
+                                'type'   => 'medium'
+                            ],
+                        ]
+                    ],
                 ]
             ]
         ],

@@ -1,0 +1,46 @@
+.grid {
+    clear: both;
+    overflow: hidden;
+}
+
+.grid .cell {
+    float: left;
+    margin-bottom: 30px;
+}
+
+.grid-triple .cell {
+    width: 31.2%;
+    margin-left: 3.2%;
+}
+
+.grid-triple .cell:nth-of-type(3n+1) {
+    margin-left: 0;
+    clear: left;
+}
+
+.product-description {
+    background: none;
+    border: none;
+}
+
+.well {
+    background: none;
+    border: none;
+    font-weight: bold;
+    padding-left: 0;
+}
+
+.form-horizontal .controls label > span {
+    width: 70px;
+    display: block;
+    float: left;
+}
+
+.form-horizontal .control-label.collection-label {
+    padding-top: 0;
+}
+
+.preview-medium {
+    min-height: 200px;
+    cursor: zoom-in;
+}

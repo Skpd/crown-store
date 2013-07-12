@@ -44,6 +44,10 @@ h6 {
     padding: 0px 0px 12px 0px;
 }
 
+.main {
+    /*padding: 15px 0;*/
+}
+
 #contact_text {
     height: auto;
     overflow: auto;

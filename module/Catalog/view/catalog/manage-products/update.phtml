@@ -5,36 +5,52 @@
  */
 ?>
 
-<?=$this->form()->openTag($form->prepare()->setAttribute('class', 'form-horizontal'))?>
+<?= $this->form()->openTag($form->prepare()->setAttribute('class', 'form-horizontal')) ?>
 
-    <? foreach ($form as $element): ?>
+<? foreach ($form as $element): ?>
+    <? if ($element instanceof \Zend\Form\Element\Collection): ?>
+        <div class="control-group<?= count($element->getMessages()) ? ' error' : '' ?>">
+            <label for="<?= $element->getName() ?>" class="control-label collection-label"><?= $element->getLabel() ? : ucfirst($element->getName()) ?></label>
+
+            <div class="controls">
+                <?= $this->formCollection($element->setAttribute('id', $element->getName())) ?>
+                <button type="button" class="btn" id="add-btn"><i class="icon-plus"></i> Add Option</button>
+                <span class="help-inline"><?= $this->formElementErrors($element) ?></span>
+            </div>
+        </div>
+    <? else: ?>
         <? /** @var $element \Zend\Form\Element */ ?>
         <div class="control-group<?= count($element->getMessages()) ? ' error' : '' ?>">
-            <label for="<?= $element->getName() ?>" class="control-label"><?=$element->getLabel() ?: ucfirst($element->getName())?></label>
+            <label for="<?= $element->getName() ?>" class="control-label"><?= $element->getLabel() ? : ucfirst($element->getName()) ?></label>
 
             <div class="controls">
 
-                <?=$this->formElement($element->setAttribute('id', $element->getName()))?>
-                <span class="help-inline"><?=$this->formElementErrors($element)?></span>
+                <?= $this->formElement($element->setAttribute('id', $element->getName())) ?>
+                <span class="help-inline"><?= $this->formElementErrors($element) ?></span>
             </div>
         </div>
-    <? endforeach; ?>
+    <? endif; ?>
+<? endforeach; ?>
 
-    <div class="form-actions">
-        <input class="btn btn-success" type="submit" name="submit" value="Update" />
-        <a class="btn" href="<?=$this->url('manage/categories/list')?>">Back</a>
-    </div>
+<div class="form-actions">
+    <input class="btn btn-success" type="submit" name="submit" value="Update" />
+    <a class="btn" href="<?= $this->url('manage/products/list') ?>">Back</a>
+</div>
 
-<?=$this->form()->closeTag($form)?>
+<?= $this->form()->closeTag($form) ?>
 
 <? $this->headLink()->appendStylesheet($this->basePath('css/select2.css')) ?>
 <? $this->headScript()->appendFile($this->basePath('js/select2.min.js')) ?>
 <? $this->headScript()->appendFile($this->basePath('js/select2_locale_ru.js')) ?>
 
 <? $this->headScript()->captureStart() ?>
-    //<script type="text/javascript">
-    (function() {
+//<script type="text/javascript">
+    (function () {
         $('#categories').select2({width: 220});
+
+        $('#add-btn').click(function () {
+            $($(this).siblings('span[data-template]').data('template').replace(/__index__/g, $('.option-name').length)).insertBefore($(this));
+        });
     })();
     //</script>
 <? $this->headScript()->captureEnd() ?>

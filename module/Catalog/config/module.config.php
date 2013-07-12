@@ -19,6 +19,7 @@ return [
         'invokables' => [
             'CategoryForm' => 'Catalog\Form\CategoryForm',
             'ProductForm'  => 'Catalog\Form\ProductForm',
+            'OptionFieldset'  => 'Catalog\Form\OptionFieldset',
         ]
     ],
     'view_helpers'    => [

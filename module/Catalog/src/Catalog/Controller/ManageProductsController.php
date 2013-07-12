@@ -4,6 +4,7 @@ namespace Catalog\Controller;
 
 use Catalog\Entity\Image;
 use Catalog\Entity\Product;
+use Catalog\Entity\Value;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -42,18 +43,15 @@ class ManageProductsController extends AbstractActionController
             if ($form->isValid()) {
                 $entity = $form->getData();
 
-                $images = $form->get('image')->getValue();
+                $i = $form->get('image')->getValue();
+                if (!empty($i) && $i['error'] === UPLOAD_ERR_OK) {
+                    $image = new Image();
+                    $image->setImage(file_get_contents($i['tmp_name']));
+                    $image->setMimeType($i['type']);
+                    $image->setName($i['name']);
 
-                if (!empty($images)) {
-                    foreach ($images as $i) {
-                        $image = new Image();
-                        $image->setImage(file_get_contents($i['tmp_name']));
-                        $image->setMimeType($i['type']);
-                        $image->setName($i['name']);
-
-                        $this->getEntityManager()->persist($image);
-                        $entity->addImages([$image]);
-                    }
+                    $this->getEntityManager()->persist($image);
+                    $entity->setImages([$image]);
                 }
 
                 $this->getEntityManager()->persist($entity);
@@ -65,7 +63,7 @@ class ManageProductsController extends AbstractActionController
         }
 
         return [
-            'form' => $form
+            'form' => $form,
         ];
     }
 
@@ -86,9 +84,21 @@ class ManageProductsController extends AbstractActionController
             $form->setData($this->getRequest()->getPost());
 
             if ($form->isValid()) {
-                $category = $form->getData();
+                $entity = $form->getData();
 
-                $this->getEntityManager()->persist($category);
+                $i = $this->getRequest()->getFiles('image');
+
+                if (!empty($i) && $i['error'] === UPLOAD_ERR_OK) {
+                    $image = new Image();
+                    $image->setImage(file_get_contents($i['tmp_name']));
+                    $image->setMimeType($i['type']);
+                    $image->setName($i['name']);
+
+                    $this->getEntityManager()->persist($image);
+                    $entity->setImages([$image]);
+                }
+
+                $this->getEntityManager()->persist($entity);
                 $this->getEntityManager()->flush();
 
                 $this->flashMessenger()->addSuccessMessage('Product added.');
@@ -97,7 +107,7 @@ class ManageProductsController extends AbstractActionController
         }
 
         return [
-            'form' => $form
+            'form' => $form,
         ];
     }
 
