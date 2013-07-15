@@ -15,13 +15,13 @@ return [
                     ],
                 ],
             ],
-            'manufacture' => [
+            'news' => [
                 'type'    => 'Literal',
                 'options' => [
-                    'route'    => '/manufacture',
+                    'route'    => '/news',
                     'defaults' => [
                         'controller' => 'PhlySimplePage\Controller\Page',
-                        'template'   => 'web/pages/manufacture',
+                        'template'   => 'web/pages/news',
                     ],
                 ],
             ],
