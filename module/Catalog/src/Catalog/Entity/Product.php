@@ -107,14 +107,17 @@ class Product
         }
     }
 
+    /**
+     * @param $categories ArrayCollection
+     */
     public function addCategories($categories)
     {
         foreach ($categories as $category) {
             $this->categories->add($category);
             $category->addProduct($this);
 
-            if ($category->getParent()) {
-                $this->addCategories([$category->getParent()]);
+            if ($category->getParent() && !$categories->contains($category)) {
+                $this->addCategories(new ArrayCollection([$category->getParent()]));
             }
         }
     }

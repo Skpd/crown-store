@@ -1,25 +1,62 @@
 <?
 /**
- * @var $this \Zend\View\Renderer\PhpRenderer
- * @var $products \Catalog\Entity\Product[]
- * @var $category \Catalog\Entity\Category
+ * @var $this            \Zend\View\Renderer\PhpRenderer
+ * @var $products        array
+ * @var $childCategories array
  */
 ?>
-<div class="well">
-<?=$this->navigation()->breadcrumbs($this->categorieslist()->getContainer()) ?>
+
+<div class="module-specials">
+    <? foreach ($childCategories as $category): ?>
+        <h3><span>
+            <a href="<?= $this->url('products/list-by-category', ['slug' => $category['category']['slug']]) ?>">
+                <?= $category['category']['name'] ?>
+            </a>
+        </span></h3>
+
+        <div class="grid grid-triple boxIndent">
+            <? foreach ($category['products'] as $product): ?>
+                <div class="cell">
+                    <div class="product">
+                        <a href="<?= $this->url('products/list-by-category/view', ['slug' => $category['category']['slug'], 'name' => $product['name']]) ?>">
+                            <? if (!empty($product['id'])): ?>
+                                <img class="preview-small" src="<?= $this->url('products/get-image', ['id' => $product['id']]) ?>"
+                                     alt="<?= $product['name'] ?>" />
+                            <? endif; ?>
+                        </a>
+
+                        <p class="name">
+                            <a href="<?= $this->url(
+                                'products/list-by-category/view',
+                                ['slug' => $category['category']['slug'], 'name' => $product['name']]
+                            ) ?>">
+                                <?= $product['name'] ?>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            <? endforeach; ?>
+        </div>
+    <? endforeach; ?>
 </div>
+
+<div class="well">
+    <?= $this->navigation()->breadcrumbs($this->categorieslist()->getContainer()) ?>
+</div>
+
 <div class="grid grid-triple">
     <? foreach ($products as $product): ?>
         <div class="cell">
             <div class="product">
-                <a href="<?=$this->url('products/list-by-category/view', ['slug' => $category->getSlug(), 'name' => $product->getName()])?>">
-                    <? if ($product->getImages()->count()): ?>
-                        <img class="preview-small" src="<?=$this->url('products/get-image', ['id' => $product->getImages()->first()->getId()])?>" alt="<?=$product->getName()?>" />
+                <a href="<?= $this->url('products/list-by-category/view', ['slug' => $product['slug'], 'name' => $product['name']]) ?>">
+                    <? if (!empty($product['id'])): ?>
+                        <img class="preview-small" src="<?= $this->url('products/get-image', ['id' => $product['id']]) ?>" alt="<?= $product['name'] ?>" />
                     <? endif; ?>
                 </a>
+
                 <p class="name">
-                    <a href="<?=$this->url('products/list-by-category/view', ['slug' => $category->getSlug(), 'name' => $product->getName()])?>">
-                        <?=$product->getName()?>
+                    <a href="<?= $this->url('products/list-by-category/view', ['slug' => $product['slug'], 'name' => $product['name']]) ?>">
+                        <?= $product['name'] ?>
                     </a>
                 </p>
             </div>

@@ -2,6 +2,7 @@
 
 return [
     'modules'                 => [
+//        'ZendDeveloperTools',
         'AssetManager',
         'DoctrineModule',
         'DoctrineORMModule',

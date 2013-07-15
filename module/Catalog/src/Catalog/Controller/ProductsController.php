@@ -43,14 +43,41 @@ class ProductsController extends AbstractActionController
     {
         $slug = $this->params('slug', null);
 
-        /** @var null|\Catalog\Entity\Category $category */
-        $category = $this->getEntityManager()->getRepository('Catalog\Entity\Category')->findOneBy(['slug' => $slug]);
+        $products = $this->getEntityManager()->createQuery(
+            <<<'DQL'
+            SELECT category.slug, product.name, image.id FROM Catalog\Entity\Product product
+            JOIN product.categories AS category
+            JOIN product.images AS image
+            WHERE category.slug = :slug
+DQL
+        )->setParameter('slug', $slug)->setMaxResults(9)->getArrayResult();
 
-        if (empty($category)) {
-            $this->redirect()->toRoute('home');
+        $category = $this->getEntityManager()->getRepository('Catalog\Entity\Category')->findBy(['slug' => $slug]);
+        $childCategories = [];
+
+        foreach ($this->getEntityManager()->getRepository('Catalog\Entity\Category')->findBy(['parent' => $category]) as $childCategory) {
+            $childProducts = $this->getEntityManager()->createQuery(
+                <<<'DQL'
+                SELECT product.name, image.id
+                    FROM Catalog\Entity\Product product
+                    JOIN product.categories AS category
+                    JOIN product.images AS image
+                WHERE category.slug = :slug
+DQL
+            )->setParameter('slug', $childCategory->getSlug())->setMaxResults(3)->getArrayResult();
+
+            if (count($childProducts) > 0) {
+                $childCategories[] = [
+                    'category' => [
+                        'slug' => $childCategory->getSlug(),
+                        'name' => $childCategory->getName(),
+                    ],
+                    'products' => $childProducts
+                ];
+            }
         }
 
-        return ['products' => $category->getProducts(), 'category' => $category];
+        return ['products' => $products, 'childCategories' => $childCategories];
     }
 
     public function viewAction()

@@ -762,7 +762,7 @@ dl.contentpane .button-field {
     font-weight: normal;
 }
 
-.module-categories li a:hover, .module-categories li.active a, .module-categories li.active .level2 li a:hover, .module-categories li.active .level2 li.active a {
+.module-categories li>a:hover, .module-categories li.active>a, .module-categories li.active .level2 li a:hover, .module-categories li.active .level2 li.active a {
     background: #08bbdf;
     font-weight: bold;
     color: #fff;
@@ -786,6 +786,11 @@ dl.contentpane .button-field {
 
 .module-specials .product_image_container img, .module-new .product_image_container img {
     border: none;
+}
+
+.module-specials h3 a {
+    text-decoration: none;
+    color: #fff;
 }
 
 .module_menu, .module-newsletter {
@@ -1350,4 +1355,13 @@ ol {
 .clearfix {
     display: block;
     overflow: hidden
+}
+
+.navigation li ul {
+    display: none;
+}
+
+.navigation li.active ul {
+    display: block;
+    padding-left: 15px;
 }
