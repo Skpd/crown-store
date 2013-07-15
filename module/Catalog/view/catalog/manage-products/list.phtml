@@ -72,15 +72,14 @@
 </div>
 
 
-<?// $this->headLink()->appendStylesheet($this->basePath('assets/data-tables/DT_bootstrap.css')) ?>
-<?// $this->headScript()->appendFile($this->basePath('assets/data-tables/jquery.dataTables.js')) ?>
-<?// $this->headScript()->appendFile($this->basePath('assets/data-tables/DT_bootstrap.js')) ?>
-<?// $this->headScript()->appendFile($this->basePath('js/jquery/data-tables/datatables.js')) ?>
-<!---->
-<?// $this->headScript()->captureStart() ?>
-<!--//<script type="text/javascript">-->
-<!--    (function() {-->
-<!--        $('#users').dataTable();-->
-<!--    })();-->
-<!--    //</script>-->
-<?// $this->headScript()->captureEnd() ?>
+<? $this->headLink()->appendStylesheet($this->basePath('css/DT_bootstrap.css')) ?>
+<? $this->headScript()->appendFile($this->basePath('js/jquery.dataTables.js')) ?>
+<? $this->headScript()->appendFile($this->basePath('js//DT_bootstrap.js')) ?>
+
+<? $this->headScript()->captureStart() ?>
+    //<script type="text/javascript">
+    (function() {
+        $('#products').dataTable();
+    })();
+    //</script>
+<? $this->headScript()->captureEnd() ?>
