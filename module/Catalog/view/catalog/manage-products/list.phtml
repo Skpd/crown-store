@@ -79,7 +79,9 @@
 <? $this->headScript()->captureStart() ?>
     //<script type="text/javascript">
     (function() {
-        $('#products').dataTable();
+        $('#products').dataTable({
+            bStateSave: true
+        });
     })();
     //</script>
 <? $this->headScript()->captureEnd() ?>
