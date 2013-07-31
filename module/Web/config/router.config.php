@@ -15,13 +15,13 @@ return [
                     ],
                 ],
             ],
-            'news' => [
+            'calc' => [
                 'type'    => 'Literal',
                 'options' => [
-                    'route'    => '/news',
+                    'route'    => '/calc',
                     'defaults' => [
                         'controller' => 'PhlySimplePage\Controller\Page',
-                        'template'   => 'web/pages/news',
+                        'template'   => 'web/pages/calc',
                     ],
                 ],
             ],

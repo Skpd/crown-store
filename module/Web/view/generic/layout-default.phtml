@@ -35,12 +35,7 @@
         <div class="menu-bg">
             <div class="clear">
                 <div id="topmenu">
-                    <ul class="menu-nav">
-                        <li><a href="<?= $this->url('home') ?>">О компании</a></li>
-                        <li><a href="<?= $this->url('news') ?>">Расчет Вашей Этикетки</a></li>
-                        <li><a href="<?= $this->url('production') ?>">Ткани На Складе</a></li>
-                        <li><a href="<?= $this->url('contacts') ?>">Контакты</a></li>
-                    </ul>
+                    <?=$this->navigation('default')->menu()->setUlClass('menu-nav')?>
                 </div>
             </div>
         </div>
@@ -70,12 +65,7 @@
         <div class="space">
             <div class="clear">
                 <div class="footerText">
-                    <ul class="menu">
-                        <li><a href="<?= $this->url('home') ?>">О компании</a></li>
-                        <li><a href="<?= $this->url('news') ?>">Расчет Вашей Этикетки</a></li>
-                        <li><a href="<?= $this->url('production') ?>">Ткани На Складе</a></li>
-                        <li><a href="<?= $this->url('contacts') ?>">Контакты</a></li>
-                    </ul>
+                    <?=$this->navigation('default')->menu()->setUlClass('menu')?>
                     <div>&copy; 2013 Crowngroup </div>
                     <!--{%FOOTER_LINK} -->
                 </div>

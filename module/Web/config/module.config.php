@@ -6,6 +6,9 @@ return [
     'service_manager' => [
         'aliases' => [
             'orm_manager' => 'Doctrine\ORM\EntityManager'
+        ],
+        'factories' => [
+            'default' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         ]
     ],
     'controllers'     => [
