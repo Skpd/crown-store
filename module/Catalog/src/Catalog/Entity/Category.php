@@ -63,6 +63,12 @@ class Category
      */
     private $products;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @var string
+     */
+    private $displayOrder = 0;
+
     #endregion
 
     public function __construct()
@@ -210,6 +216,22 @@ class Category
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * @param string $displayOrder
+     */
+    public function setDisplayOrder($displayOrder)
+    {
+        $this->displayOrder = $displayOrder;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayOrder()
+    {
+        return $this->displayOrder;
     }
 
     #endregion

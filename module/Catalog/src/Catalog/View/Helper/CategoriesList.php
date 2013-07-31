@@ -57,7 +57,8 @@ class CategoriesList extends AbstractHelper implements ServiceLocatorAwareInterf
         $page->setLabel($category->getName())
             ->setRoute('products/list-by-category')
             ->setParams(['slug' => $category->getSlug()])
-            ->setRouteMatch(Mvc::getDefaultRouter()->match($this->getServiceLocator()->getServiceLocator()->get('request')));
+            ->setRouteMatch(Mvc::getDefaultRouter()->match($this->getServiceLocator()->getServiceLocator()->get('request')))
+            ->setOrder($category->getDisplayOrder());
 
         return $page;
     }
