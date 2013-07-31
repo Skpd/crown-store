@@ -25,7 +25,7 @@ class CategoriesList extends AbstractHelper implements ServiceLocatorAwareInterf
             $em              = $this->getServiceLocator()->getServiceLocator()->get('orm_manager');
             $this->container = new Navigation();
             Mvc::setDefaultRouter($this->getServiceLocator()->getServiceLocator()->get('router'));
-            $this->container->setPages($this->buildPages($em->getRepository('Catalog\Entity\Category')->findAll()));
+            $this->container->setPages($this->buildPages($em->getRepository('Catalog\Entity\Category')->findBy(['visible' => true])));
         }
 
         return $this;

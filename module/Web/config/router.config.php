@@ -5,7 +5,7 @@ namespace Web;
 return [
     'router' => [
         'routes' => [
-            'home'        => [
+            'home'      => [
                 'type'    => 'literal',
                 'options' => [
                     'route'    => '/',
@@ -15,7 +15,7 @@ return [
                     ],
                 ],
             ],
-            'calc' => [
+            'calc'      => [
                 'type'    => 'Literal',
                 'options' => [
                     'route'    => '/calc',
@@ -25,17 +25,20 @@ return [
                     ],
                 ],
             ],
-            'production' => [
+            'warehouse' => [
                 'type'    => 'Literal',
                 'options' => [
-                    'route'    => '/production',
+                    'route'    => '/warehouse',
                     'defaults' => [
-                        'controller' => 'PhlySimplePage\Controller\Page',
-                        'template'   => 'web/pages/production',
+                        'slug'        => 'warehouse',
+                        'controller'  => 'Catalog\Controller\Products',
+                        'action'      => 'list-by-category',
+                        'page'        => 0,
+                        'showDetails' => false
                     ],
                 ],
             ],
-            'contacts' => [
+            'contacts'  => [
                 'type'    => 'Literal',
                 'options' => [
                     'route'    => '/contacts',

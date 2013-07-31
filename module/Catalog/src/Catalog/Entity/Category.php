@@ -65,9 +65,15 @@ class Category
 
     /**
      * @ORM\Column(type="integer")
-     * @var string
+     * @var int
      */
     private $displayOrder = 0;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    private $visible = true;
 
     #endregion
 
@@ -232,6 +238,22 @@ class Category
     public function getDisplayOrder()
     {
         return $this->displayOrder;
+    }
+
+    /**
+     * @param boolean $visible
+     */
+    public function setVisible($visible)
+    {
+        $this->visible = $visible;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getVisible()
+    {
+        return $this->visible;
     }
 
     #endregion

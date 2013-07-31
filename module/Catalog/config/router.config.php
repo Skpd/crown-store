@@ -120,25 +120,24 @@ return [
                     ],
                 ],
                 'child_routes'  => [
+                    'view' => [
+                        'type'    => 'segment',
+                        'options' => [
+                            'route'  => '/:slug/:name',
+                            'defaults' => [
+                                'action' => 'view'
+                            ],
+                        ]
+                    ],
                     'list-by-category' => [
                         'type'          => 'segment',
                         'may_terminate' => true,
                         'options'       => [
-                            'route'  => '/:slug',
+                            'route'  => '/:slug[/page/:page]',
                             'defaults' => [
-                                'action' => 'list-by-category'
+                                'action' => 'list-by-category',
+                                'page'   => 0
                             ],
-                        ],
-                        'child_routes'  => [
-                            'view' => [
-                                'type'    => 'segment',
-                                'options' => [
-                                    'route'  => '/:name',
-                                    'defaults' => [
-                                        'action' => 'view'
-                                    ],
-                                ]
-                            ]
                         ]
                     ],
                     'get-image' => [

@@ -4,6 +4,8 @@ namespace Catalog\Controller;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -42,15 +44,34 @@ class ProductsController extends AbstractActionController
     public function listByCategoryAction()
     {
         $slug = $this->params('slug', null);
+        $page = $this->params('page', 0);
 
         $products = $this->getEntityManager()->createQuery(
             <<<'DQL'
-            SELECT category.slug, product.name, image.id FROM Catalog\Entity\Product product
-            JOIN product.categories AS category
-            JOIN product.images AS image
+            SELECT product.id, category.slug slug, product.name name, image.id FROM Catalog\Entity\Product product
+                JOIN product.categories AS category
+                JOIN product.images AS image
             WHERE category.slug = :slug
 DQL
-        )->setParameter('slug', $slug)->setMaxResults(9)->getArrayResult();
+        )->setParameter('slug', $slug);
+
+        $paginator = new Paginator($products);
+        $paginator->setUseOutputWalkers(false);
+
+        $products = new \Zend\Paginator\Paginator(new DoctrinePaginator($paginator));
+        $products->setItemCountPerPage(9);
+        $products->setCurrentPageNumber($page);
+
+        $total = $this->getEntityManager()->createQuery(
+            <<<'DQL'
+            SELECT COUNT(product) FROM Catalog\Entity\Product product
+                JOIN product.categories AS category
+                JOIN product.images AS image
+            WHERE category.slug = :slug
+DQL
+        )->setParameter('slug', $slug)->getArrayResult();
+
+        $total = (int) $total[0][1];
 
         $category = $this->getEntityManager()->getRepository('Catalog\Entity\Category')->findBy(['slug' => $slug]);
         $childCategories = [];
@@ -77,7 +98,7 @@ DQL
             }
         }
 
-        return ['products' => $products, 'childCategories' => $childCategories];
+        return ['products' => $products, 'childCategories' => $childCategories, 'total' => $total, 'showDetails' => $this->params('showDetails', true)];
     }
 
     public function viewAction()

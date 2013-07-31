@@ -15,7 +15,7 @@ return [
             ],
             [
                 'label' => 'Ткани На Складе',
-                'route' => 'production'
+                'route' => 'warehouse'
             ],
             [
                 'label' => 'Контакты',

@@ -18,7 +18,9 @@
             <? foreach ($category['products'] as $product): ?>
                 <div class="cell">
                     <div class="product">
-                        <a href="<?= $this->url('products/list-by-category/view', ['slug' => $category['category']['slug'], 'name' => $product['name']]) ?>">
+                        <? if ($showDetails): ?>
+                            <a href="<?= $this->url('products/view', ['slug' => $category['category']['slug'], 'name' => $product['name']]) ?>">
+                        <? endif; ?>
                             <? if (!empty($product['id'])): ?>
                                 <img class="preview-small" src="<?= $this->url('products/get-image', ['id' => $product['id']]) ?>"
                                      alt="<?= $product['name'] ?>" />
@@ -26,10 +28,12 @@
                         </a>
 
                         <p class="name">
-                            <a href="<?= $this->url(
-                                'products/list-by-category/view',
-                                ['slug' => $category['category']['slug'], 'name' => $product['name']]
-                            ) ?>">
+                            <? if ($showDetails): ?>
+                                <a href="<?= $this->url(
+                                    'products/view',
+                                    ['slug' => $category['category']['slug'], 'name' => $product['name']]
+                                ) ?>">
+                            <? endif; ?>
                                 <?= $product['name'] ?>
                             </a>
                         </p>
@@ -48,18 +52,38 @@
     <? foreach ($products as $product): ?>
         <div class="cell">
             <div class="product">
-                <a href="<?= $this->url('products/list-by-category/view', ['slug' => $product['slug'], 'name' => $product['name']]) ?>">
+                <? if ($showDetails): ?>
+                    <a href="<?= $this->url('products/view', ['slug' => $product['slug'], 'name' => $product['name']]) ?>">
+                <? endif; ?>
+
                     <? if (!empty($product['id'])): ?>
                         <img class="preview-small" src="<?= $this->url('products/get-image', ['id' => $product['id']]) ?>" alt="<?= $product['name'] ?>" />
                     <? endif; ?>
-                </a>
+                <? if ($showDetails): ?>
+                    </a>
+                <? endif; ?>
 
                 <p class="name">
-                    <a href="<?= $this->url('products/list-by-category/view', ['slug' => $product['slug'], 'name' => $product['name']]) ?>">
+                    <? if ($showDetails): ?>
+                        <a href="<?= $this->url('products/view', ['slug' => $product['slug'], 'name' => $product['name']]) ?>">
+                    <? endif; ?>
+
                         <?= $product['name'] ?>
-                    </a>
+                    <? if ($showDetails): ?>
+                        </a>
+                    <? endif; ?>
                 </p>
             </div>
         </div>
     <? endforeach; ?>
 </div>
+
+<?php echo $this->paginationControl($products, 'Sliding', 'generic/pagination', ['route' => 'products/list-by-category', 'slug' => $product['slug']]); ?>
+
+<table>
+    <tr>
+        <td class="left"></td>
+        <td class="text-center"></td>
+        <td class="right"></td>
+    </tr>
+</table>
