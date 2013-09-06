@@ -4,6 +4,7 @@ namespace Catalog\View\Helper;
 
 use Catalog\Entity\Category;
 use Doctrine\ORM\EntityManager;
+use Zend\Mvc\Router\RouteMatch;
 use Zend\Navigation\Navigation;
 use Zend\Navigation\Page\Mvc;
 use Zend\Navigation\Page\Uri;
@@ -25,7 +26,12 @@ class CategoriesList extends AbstractHelper implements ServiceLocatorAwareInterf
             $em              = $this->getServiceLocator()->getServiceLocator()->get('orm_manager');
             $this->container = new Navigation();
             Mvc::setDefaultRouter($this->getServiceLocator()->getServiceLocator()->get('router'));
-            $this->container->setPages($this->buildPages($em->getRepository('Catalog\Entity\Category')->findBy(['visible' => true])));
+
+            $match = Mvc::getDefaultRouter()->match($this->getServiceLocator()->getServiceLocator()->get('request'));
+
+            if ($match instanceof RouteMatch) {
+                $this->container->setPages($this->buildPages($em->getRepository('Catalog\Entity\Category')->findBy(['visible' => true])));
+            }
         }
 
         return $this;

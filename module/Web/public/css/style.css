@@ -606,6 +606,7 @@ dl.contentpane .button-field {
 
 .error {
     margin: 0px 0px 10px 0px;
+    color: red;
 }
 
 #system-message dt.error, dt.message {

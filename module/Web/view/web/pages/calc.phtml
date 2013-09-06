@@ -1,2 +1,109 @@
-<h2>Новости</h2>
-<p>Наша продукция производится на ткацких станках немецкого производства Jakob Muller AG.</p>
+<h2>Расчет Вашей Этикетки</h2>
+<p>Здесь Вы можете примерно рассчитать цену на этикетку с Вашим логотипом. Просьба обратить внимание, что цена приблизительная, считается автоматически на качество 56 пикс (среднее). Для этого заполните поля ниже, в сантиметрах.</p>
+<img src="<?=$this->basePath('/img/sample.png')?>" class="img-rounded">
+<form id="form">
+    <div class="row-fluid">
+        <div class="span4">
+            <div class="control-group">
+                <label for="length">Ширина этикетки</label>
+                <div class="controls">
+                    <input type="text" id="length" name="length" />
+                </div>
+            </div>
+
+            <div class="control-group clearfix">
+                <label class="clearfix"><span class="pull-left">Длины цветов</span></label>
+                <div class="clearfix" id="colors">
+                    <label>Первый цвет <div class="input-append">
+                        <input class="span10" name="color0" type="text">
+                        <button id="addColor" class="btn" type="button"><i class="icon-plus"></i></button>
+                    </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="checkbox" for="bend">Загибка <input type="checkbox" id="bend" name="bend" /></label>
+            </div>
+            <div class="lead" id="result"></div>
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit" id="calculate">Рассчитать</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<? $this->headScript()->appendFile($this->basePath('js/jquery.validate.min.js')); ?>
+
+<? $this->headScript()->captureStart() ?>
+//<script type="text/javascript">
+    (function() {
+        var colorNames = ['Первый цвет','Второй цвет','Третий цвет','Четвертый цвет'];
+
+        $('#addColor').on('click', function() {
+            var $container = $('#colors');
+            var number =  $container.find('input').length;
+
+            $container.append('<label>' + colorNames[number] + ' <input type="text" name="color' + number + '" /></label>');
+
+            if (number > 2) {
+                $(this).prop('disabled', true).addClass('disabled');
+            }
+        });
+
+        $.validator.addMethod(
+            "regex",
+            function (value, element, regexp) {
+                var re = new RegExp(regexp);
+                return this.optional(element) || re.test(value);
+            }
+        );
+
+        $("#form").validate({
+            rules: {
+                length: {
+                    required: true,
+                    regex: /[0-9]+[\.\,]{0,1}[0-9]*/
+                },
+                color0: {
+                    required: true,
+                    regex: /[0-9]+[\.\,]{0,1}[0-9]*/
+                },
+                color1: {regex: /[0-9]+[\.\,]{0,1}[0-9]*/},
+                color2: {regex: /[0-9]+[\.\,]{0,1}[0-9]*/},
+                color3: {regex: /[0-9]+[\.\,]{0,1}[0-9]*/}
+            },
+            messages: {
+                length: {
+                    required: 'Обязательное поле',
+                    regex: 'Только числа'
+                },
+                color0: {
+                    required: 'Обязательное поле',
+                    regex: 'Только числа'
+                },
+                color1: {
+                    regex: 'Только числа'
+                },
+                color2: {
+                    regex: 'Только числа'
+                },
+                color3: {
+                    regex: 'Только числа'
+                }
+            },
+            submitHandler: function() {
+                var colorSum = 0, length = parseFloat($('#length').val().replace(',', '.')), bend = $('#bend').is(':checked') ? 0.0027 : 0;
+
+                $('#colors input').each(function() {
+                    colorSum += parseFloat($(this).val().replace(',', '.'));
+                });
+
+                $('#result').text('$' + ((colorSum * 56 * 0.00028) / (10 / length) + (colorSum * length * 0.000012 * 17) + bend).toFixed(4) );
+
+                return false;
+            }
+        });
+    })();
+//</script>
+<? $this->headScript()->captureEnd() ?>
