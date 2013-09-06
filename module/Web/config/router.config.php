@@ -30,11 +30,8 @@ return [
                 'options' => [
                     'route'    => '/warehouse',
                     'defaults' => [
-                        'slug'        => 'warehouse',
-                        'controller'  => 'Catalog\Controller\Products',
-                        'action'      => 'list-by-category',
-                        'page'        => 0,
-                        'showDetails' => false
+                        'controller' => 'PhlySimplePage\Controller\Page',
+                        'template'   => 'web/pages/warehouse',
                     ],
                 ],
             ],
