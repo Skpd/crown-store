@@ -65,7 +65,19 @@
             <div class="clear">
                 <div class="footerText">
                     <?=$this->navigation('default')->menu()->setUlClass('menu')?>
-                    <div>&copy; 2013 Crowngroup </div>
+                    <div class="pull-right">
+                        <!--LiveInternet counter--><script type="text/javascript"><!--
+                            document.write("<a href='http://www.liveinternet.ru/click' "+
+                                "target=_blank><img src='//counter.yadro.ru/hit?t44.1;r"+
+                                escape(document.referrer)+((typeof(screen)=="undefined")?"":
+                                ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+                                    screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+                                ";"+Math.random()+
+                                "' alt='' title='LiveInternet' "+
+                                "border='0' width='31' height='31'><\/a>")
+                            //--></script><!--/LiveInternet-->
+                    </div>
+                    <div>&copy; 2013 Crowngroup</div>
                     <!--{%FOOTER_LINK} -->
                 </div>
             </div>
@@ -76,15 +88,5 @@
 
 <? $this->headScript()->prependFile($this->basePath('js/jquery-1.9.1.min.js')) ?>
 <?= $this->headScript() ?>
-<!--LiveInternet counter--><script type="text/javascript"><!--
-    document.write("<a href='http://www.liveinternet.ru/click' "+
-        "target=_blank><img src='//counter.yadro.ru/hit?t44.1;r"+
-        escape(document.referrer)+((typeof(screen)=="undefined")?"":
-        ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
-            screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
-        ";"+Math.random()+
-        "' alt='' title='LiveInternet' "+
-        "border='0' width='31' height='31'><\/a>")
-    //--></script><!--/LiveInternet-->
 </body>
 </html>

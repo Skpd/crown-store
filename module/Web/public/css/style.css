@@ -1142,7 +1142,7 @@ ul.menu-nav li a:hover, ul.menu-nav li.active a {
 }
 
 #footer .footerText div {
-    float: left;
+    /*float: left;*/
 }
 
 #footer ul {
