@@ -58,6 +58,7 @@ class CategoryForm extends Form implements InputFilterProviderInterface, Service
 
         $this->add(['name' => 'name', 'type' => 'text', 'options' => ['label' => 'Name']]);
         $this->add(['name' => 'slug', 'type' => 'text', 'options' => ['label' => 'Slug']]);
+        $this->add(['name' => 'displayOrder', 'type' => 'number', 'options' => ['label' => 'Display Order']]);
 
         $this->add(
             [
