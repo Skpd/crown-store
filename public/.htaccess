@@ -1,3 +1,7 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} !^www.crowngroup.ru [NC]
+RewriteRule ^(.*)$ http://www.crowngroup.ru/$1 [R=301,L]
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
