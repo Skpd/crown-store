@@ -3,23 +3,25 @@
  * @var $this            \Zend\View\Renderer\PhpRenderer
  * @var $products        array
  * @var $childCategories array
+ * @var $displaySeo      bool
+ * @var $category        \Catalog\Entity\Category[]
  */
 ?>
 
 <div class="module-specials">
-    <? foreach ($childCategories as $category): ?>
+    <? foreach ($childCategories as $child): ?>
         <h3><span>
-            <a href="<?= $this->url('products/list-by-category', ['slug' => $category['category']['slug']]) ?>">
-                <?= $category['category']['name'] ?>
+            <a href="<?= $this->url('products/list-by-category', ['slug' => $child['category']['slug']]) ?>">
+                <?= $child['category']['name'] ?>
             </a>
         </span></h3>
 
         <div class="grid grid-triple boxIndent">
-            <? foreach ($category['products'] as $product): ?>
+            <? foreach ($child['products'] as $product): ?>
                 <div class="cell">
                     <div class="product">
                         <? if ($showDetails): ?>
-                            <a href="<?= $this->url('products/view', ['slug' => $category['category']['slug'], 'name' => $product['name']]) ?>">
+                            <a href="<?= $this->url('products/view', ['slug' => $child['category']['slug'], 'name' => $product['name']]) ?>">
                         <? endif; ?>
                             <? if (!empty($product['id'])): ?>
                                 <img class="preview-small" src="<?= $this->url('products/get-image', ['id' => $product['id']]) ?>"
@@ -31,7 +33,7 @@
                             <? if ($showDetails): ?>
                                 <a href="<?= $this->url(
                                     'products/view',
-                                    ['slug' => $category['category']['slug'], 'name' => $product['name']]
+                                    ['slug' => $child['category']['slug'], 'name' => $product['name']]
                                 ) ?>">
                             <? endif; ?>
                                 <?= $product['name'] ?>
@@ -79,6 +81,13 @@
 </div>
 
 <?php echo $this->paginationControl($products, 'Sliding', 'generic/pagination', ['route' => 'products/list-by-category', 'slug' => $product['slug']]); ?>
+
+<? if ($displaySeo && !empty($category) && $category[0]) {
+    $this->headTitle($category[0]->getTitle());
+    $this->headMeta()->setName('keywords', $category[0]->getKeywords());
+    $this->headMeta()->setName('description', $category[0]->getDescription());
+    echo $category[0]->getText();
+} ?>
 
 <table>
     <tr>

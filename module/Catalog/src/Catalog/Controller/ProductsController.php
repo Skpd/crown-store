@@ -98,7 +98,14 @@ DQL
             }
         }
 
-        return ['products' => $products, 'childCategories' => $childCategories, 'total' => $total, 'showDetails' => $this->params('showDetails', true)];
+        return [
+            'products' => $products,
+            'childCategories' => $childCategories,
+            'total' => $total,
+            'category' => $category,
+            'displaySeo' => $page <= 1,
+            'showDetails' => $this->params('showDetails', true)
+        ];
     }
 
     public function viewAction()

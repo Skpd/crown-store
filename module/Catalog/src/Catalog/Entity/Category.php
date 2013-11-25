@@ -75,6 +75,29 @@ class Category
      */
     private $visible = true;
 
+    /**
+     * @ORM\Column(type="string", nullable=false, unique=false, length=255)
+     * @var string
+     */
+    private $keywords;
+
+    /**
+     * @ORM\Column(type="string", nullable=false, unique=false, length=127)
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="text", nullable=false, unique=false)
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="text", nullable=false, unique=false)
+     * @var string
+     */
+    private $text;
     #endregion
 
     public function __construct()
@@ -111,6 +134,70 @@ class Category
     }
 
     #region Getters / Setters
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $keywords
+     */
+    public function setKeywords($keywords)
+    {
+        $this->keywords = $keywords;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKeywords()
+    {
+        return $this->keywords;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
     /**
      * @param \DateTime $created
