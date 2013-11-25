@@ -1,15 +1,34 @@
-<h2>Контакты</h2>
-«КРАУН ГРУПП»
-<p>192029, Санкт-Петербург,<br />пр. Обуховской Обороны д.70 корп. 2.</p>
-<p>Тел./факс: <br>
-   (812) 313-19-30 <br />
-   (812) 309-38-13 <br />
-   E-mail: <a href="mailto:info@crowngroup.ru">info@crowngroup.ru</a>
-</p>
-<h2><br />Наши представители</h2>
-<p>
-    Республика Беларусь, г.Минск <br>
-    + 375 17 212 84 55 <br>
-    + 375 29 623 88 43 <br>
-    E-mail: <a href="mailto:mins@crowngroup.ru">minsk@crowngroup.ru</a>
-</p>
+<div class="row">
+    <div class="span4">
+        <h2>Контакты</h2>
+        «КРАУН ГРУПП»
+        <p>192029, Санкт-Петербург,<br />пр. Обуховской Обороны д.70 корп. 2.</p>
+        <p>Тел./факс: <br>
+            (812) 313-19-30 <br />
+            (812) 309-38-13 <br />
+            E-mail: <a href="mailto:info@crowngroup.ru">info@crowngroup.ru</a>
+        </p>
+        <h2><br />Наши представители</h2>
+        <p>
+            Республика Беларусь, г.Минск <br>
+            + 375 17 212 84 55 <br>
+            + 375 29 623 88 43 <br>
+            E-mail: <a href="mailto:mins@crowngroup.ru">minsk@crowngroup.ru</a>
+        </p>
+    </div>
+    <div class="span8">
+        <div id="YMaps" style="width:475px;height:400px"></div>
+    </div>
+</div>
+
+
+
+<script src="http://api-maps.yandex.ru/1.1/index.xml?key=ANQnk1IBAAAAo8vmIAIAJa4Krff_0wQzeV7D45CWcBaJltMAAAAAAAAAAACmNP5qYsER6OfV6fPgKedNOzIrJQ==" type="text/javascript"></script>
+
+<script type="text/javascript">
+    YMaps.jQuery(function () {
+        var map = new YMaps.Map(YMaps.jQuery("#YMaps")[0]);
+        map.setCenter(new YMaps.GeoPoint(30.429577, 59.900489), 17);
+        map.openBalloon(new YMaps.GeoPoint(30.429577, 59.900489), "«КРАУН ГРУПП»", {maxWidth: 110});
+    })
+</script>
